@@ -68,13 +68,30 @@ async function mainPrompt() {
             ]
         }
     ])
-};
 
-switch (userChoice) {
-    case value:
-        
-        break;
 
-    default:
-        break;
+    switch (userChoice) {
+        case ("View All Employees"):
+            return
+        case ("View All Employees By Department"):
+            return
+        case ("View All Employees By Manager"):
+            return
+        case ("Add Employee"):
+            return
+        case ("Remove Employee"):
+            return
+        case ("Update Employee Role"):
+            return
+        case ("Update Employee Manager"):
+            return
+        case ("View All Roles"):
+            return
+        case ("Add Department"):
+            return
+        case ("Remove Department"):
+            return
+        default
+        // return quit function
+    }
 }

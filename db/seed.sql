@@ -1,10 +1,4 @@
--- Create database for employees
-
--- create tables for departments(by id), roles(by id), and individual employees
-
--- id, first name, last name, title, department, salary, manager for each employee 
-
-USE employees_DB
+USE employees_db;
 
 INSERT INTO departments 
     (department_name)
@@ -14,7 +8,7 @@ VALUES
 ("Accounting"), 
 ("Sales"), 
 ("Legal"), 
-("IT"),
+("IT");
 
 INSERT INTO roles 
     (title, salary, department_id)
@@ -24,7 +18,7 @@ VALUES
 ("Director of Accounting", 50000.00, 3), 
 ("Director of Sales", 50000.00, 4), 
 ("Director of Legal", 120000.00, 5), 
-("Director of Customer Service", 50000.00, 6)
+("Director of Customer Service", 50000.00, 6);
 
 INSERT INTO employee 
     (first_name, last_name, role_id, manager_id)
@@ -33,5 +27,5 @@ VALUES
 ("Toby", "Flenderson", 2, 2), 
 ("Angela", "Martin", 3, 2), 
 ("Dwight", "Schrute", 4, 2), 
-("Dianne", "Kelly", 4 2), 
-("Kelly", "Kapoor", 6, 2)
+("Dianne", "Kelly", 4, 2), 
+("Kelly", "Kapoor", 6, 2);
