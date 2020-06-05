@@ -24,60 +24,46 @@ async function mainPrompt() {
             message: "Choose an action:",
             choices: [
                 {
-                    name: "View All Employees",
-                    value: "VIEW_EMPLOYEES"
+                    name: "View All Employees"
                 },
                 {
-                    name: "View All Employees By Department",
-                    value: "VIEW_EMPLOYEES_BY_DEPARTMENT"
+                    name: "View All Employees By Department"
                 },
                 {
-                    name: "View All Employees By Manager",
-                    value: "VIEW_EMPLOYEES_BY_MANAGER"
+                    name: "View All Employees By Manager"
                 },
                 {
-                    name: "Add Employee",
-                    value: "ADD_EMPLOYEE"
+                    name: "Add Employee"
                 },
                 {
-                    name: "Remove Employee",
-                    value: "REMOVE_EMPLOYEE"
+                    name: "Remove Employee"
                 },
                 {
-                    name: "Update Employee Role",
-                    value: "UPDATE_EMPLOYEE_ROLE"
+                    name: "Update Employee Role"
                 },
                 {
-                    name: "Update Employee Manager",
-                    value: "UPDATE_EMPLOYEE_MANAGER"
+                    name: "Update Employee Manager"
                 },
                 {
-                    name: "View All Roles",
-                    value: "VIEW_ROLES"
+                    name: "View All Roles"
                 },
                 {
-                    name: "Add Role",
-                    value: "ADD_ROLE"
+                    name: "Add Role"
                 },
                 {
-                    name: "Remove Role",
-                    value: "REMOVE_ROLE"
+                    name: "Remove Role"
                 },
                 {
-                    name: "View All Departments",
-                    value: "VIEW_DEPARTMENTS"
+                    name: "View All Departments"
                 },
                 {
-                    name: "Add Department",
-                    value: "ADD_DEPARTMENT"
+                    name: "Add Department"
                 },
                 {
-                    name: "Remove Department",
-                    value: "REMOVE_DEPARTMENT"
+                    name: "Remove Department"
                 },
                 {
-                    name: "Quit",
-                    value: "QUIT"
+                    name: "Quit"
                 }
             ]
         }
