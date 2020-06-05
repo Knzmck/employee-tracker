@@ -91,7 +91,11 @@ async function mainPrompt() {
             return
         case ("Remove Department"):
             return
-        default
-        // return quit function
+        default:
+        quit();
     }
+}
+
+function quit() {
+process.exit();
 }
