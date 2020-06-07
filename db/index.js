@@ -30,7 +30,12 @@ viewEmployeesByManager (manager_id) {
         "SELECT * FROM employee WHERE manager_id = ?", manager_id
     )
 }
-
+// View all roles 
+allRoles() {
+    return this.connection.query(
+       "SELECT * FROM roles"
+    )
+}
 
 };
 module.exports = new DB(connection);

@@ -58,7 +58,7 @@ async function mainPrompt() {
         case ("View All Employees"):
             return viewEmployees()
         case ("View All Roles"):
-            return
+            return viewRoles();
         case ("View All Departments"):
             return viewDep();
         case ("View All Employees By Manager"):
@@ -116,4 +116,10 @@ async function viewManagers(){
 async function viewDep() {
     dep = await db.viewDepartments();
     console.table(dep);
+}
+
+// View all roles 
+async function viewRoles() {
+    roles = await db.allRoles();
+    console.table(roles)
 }
