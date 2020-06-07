@@ -6,7 +6,7 @@ require("console.table");
 initialize();
 
 function initialize() {
-    const logoText = logo({ name: "Dunder Mifflin" }).render();
+    const logoText = logo({ name: "Dunder Mifflin Scranton Branch" }).render();
     console.log(logoText);
     mainPrompt();
 }
@@ -45,10 +45,10 @@ async function mainPrompt() {
                     name: "Remove Employee"
                 },
                 {
-                    name: "Remove Department"
+                    name: "Remove Role"
                 },
                 {
-                    name: "Remove Role"
+                    name: "Remove Department"
                 },
                 {
                     name: "Quit"
@@ -87,7 +87,6 @@ async function mainPrompt() {
 function quit() {
     console.log("Exiting Program!")
     process.exit();
-    mainPrompt();
 }
 // View all employees from employee table
 async function viewEmployees() {
@@ -130,7 +129,8 @@ async function viewDep() {
 // View all roles 
 async function viewRoles() {
     roles = await db.findAllRoles();
-    console.table(roles)
+    console.table(roles);
+    mainPrompt();
 }
 // Add Employee
 async function addEmployee() {
@@ -187,7 +187,7 @@ async function addEmployee() {
     await db.addNewEmployee(employee);
     // To view the updated version of the database
     viewEmployees();
-    console.log("New employee added to database!")
+    console.log("New employee added to database!");
 }
 
 // Add new Department
