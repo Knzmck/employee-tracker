@@ -70,7 +70,7 @@ async function mainPrompt() {
         case ("Update Employee Role"):
             return
         case ("Remove Department"):
-            return
+            return removeDep();
         case ("Remove Employee"):
             return
         default:
@@ -118,7 +118,7 @@ async function viewManagers() {
 async function viewDep() {
     dep = await db.viewDepartments();
     console.table(dep);
-    mainPrompt()
+    mainPrompt();
 }
 
 // View all roles 
@@ -197,4 +197,27 @@ async function addNewDep() {
     viewDep()
     console.log("department added!")
 }
-
+// Remove Department 
+async function removeDep() {
+    departments = await db.viewDepartments();
+    const allDepartments = [];
+    for (let i = 0; i < departments.length; i++) {
+        let department = {}
+        department.name = departments[i].department_name;
+        department.id = departments[i].id;
+        allDepartments.push(department)
+    }
+    console.log(allDepartments)
+    const { departmentId } = await prompt([
+        {
+            type: "list",
+            name: "departmentId",
+            message: "What department would you like to remove?",
+            choices: allDepartments
+        }
+    ])
+    console.log(departmentId)
+    await db.removeDepartment(departmentId);
+    viewDep();
+    console.log("You've removed the selected department");
+}

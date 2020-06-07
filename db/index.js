@@ -48,6 +48,12 @@ class DB {
             "INSERT INTO departments SET ?", department
         )
     }
+    // Remove department from db
+    removeDepartment (departmentId){
+        return this.connection.query(
+            "DELETE FROM departments WHERE department_name = ?", departmentId
+        )
+    }
 };
 module.exports = new DB(connection);
 
