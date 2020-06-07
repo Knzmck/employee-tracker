@@ -288,10 +288,11 @@ async function updateEmployeeRole() {
             choices: roleChoices
         }
     ]);
-
+    console.log(employeeId);
+    console.log(roleId);
     await db.updateEmployeeRole(employeeId, roleId);
     console.log("Employee's role successfully updated!");
-    viewEmployees();
+    mainPrompt();
 }
 
 async function addNewRole() {
