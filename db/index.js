@@ -37,7 +37,7 @@ class DB {
         )
     }
     // Add new employee to db 
-    addNewEmployee (employee) {
+    addNewEmployee(employee) {
         return this.connection.query(
             "INSERT INTO employee SET ?", employee
         )
@@ -49,15 +49,22 @@ class DB {
         )
     }
     // Remove department from db
-    removeDepartment (departmentId){
+    removeDepartment(departmentId) {
         return this.connection.query(
             "DELETE FROM departments WHERE department_name = ?", departmentId
         )
     }
-    removeEmployeeFromDB (employeeId) {
+    removeEmployeeFromDB(employeeId) {
         return this.connection.query(
             "DELETE FROM employee WHERE id = ?", employeeId
         )
+    }
+    // Update the given employee's role
+    updateEmployeeRole(employeeId, roleId) {
+        return this.connection.query(
+            "UPDATE employee SET role_id = ? WHERE id = ?",
+            [roleId, employeeId]
+        );
     }
 };
 module.exports = new DB(connection);

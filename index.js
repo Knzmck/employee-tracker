@@ -245,5 +245,45 @@ async function removeEmployee() {
 // Update Employee Role
 
 async function updateEmployeeRole() {
+    // Chose Employee
+    employees = await db.findAllEmployees();
+    const allEmployees = [];
+    for (let i = 0; i < employees.length; i++) {
+        let employee = {}
+        employee.name = employees[i].first_name + ' ' + employees[i].last_name;
+        employee.value = employees[i].id;
+        allEmployees.push(employee)
+    }
+    const { employeeId } = await prompt([
+        {
+            type: "list",
+            name: "employeeId",
+            message: "Selected an employee to update their role:",
+            choices: allEmployees
+        }
+    ])
+
+    // Update Role
+    const roles = await db.findAllRoles();
+
+    var roleChoices = []
+    for (let i = 0; i < roles.length; i++) {
+        let roleChoice = {}
+        roleChoice.name = roles[i].title;
+        roleChoice.value = roles[i].id;
+        roleChoices.push(roleChoice);
+    }
+    const { roleId } = await prompt([
+        {
+            type: "list",
+            name: "roleId",
+            message: "Chose a role for this employee:",
+            choices: roleChoices
+        }
+    ]);
+
+    await db.updateEmployeeRole(employeeId, roleId);
+    console.log("Employee's role successfully updated!");
+    viewEmployees();
 
 }
