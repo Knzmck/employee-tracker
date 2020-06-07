@@ -11,7 +11,7 @@ function initialize() {
     mainPrompt();
 }
 async function mainPrompt() {
-    const  userChoice = await prompt([
+    const userChoice = await prompt([
         {
             type: "list",
             name: "first",
@@ -64,15 +64,15 @@ async function mainPrompt() {
         case ("View All Employees By Manager"):
             return viewManagers();
         case ("Add Employee"):
-            return
-        case ("Remove Employee"):
+            return addEmployee();
+        case ("Add Department"):
             return
         case ("Update Employee Role"):
             return
-        case ("Add Department"):
-            return
         case ("Remove Department"):
             return
+        case ("Remove Employee"):
+             return
         default:
             quit();
     }
@@ -90,25 +90,25 @@ async function viewEmployees() {
 }
 
 // View Employees for a specific manager function
-async function viewManagers(){
+async function viewManagers() {
     employees = await db.viewManagers();
     var possibleManagers = []
     for (let i = 0; i < employees.length; i++) {
         let manager = {}
-        manager.name = employees[i].first_name + ' ' +  employees[i].last_name;
+        manager.name = employees[i].first_name + ' ' + employees[i].last_name;
         manager.value = employees[i].id;
         possibleManagers.push(manager);
     }
-    const employeesByManager = await prompt ([
-        { 
-        type: "list",
-        name: "managerChoice",
-        message: "Choose a Manager to view their employees",
-        choices: possibleManagers
+    const employeesByManager = await prompt([
+        {
+            type: "list",
+            name: "managerChoice",
+            message: "Choose a Manager to view their employees",
+            choices: possibleManagers
         }
     ])
     empByManager = await db.viewEmployeesByManager(employeesByManager.managerChoice);
-    
+
     console.table(empByManager);
 }
 
@@ -122,4 +122,60 @@ async function viewDep() {
 async function viewRoles() {
     roles = await db.allRoles();
     console.table(roles)
+}
+// Add Employee
+async function addEmployee () {
+    const roles = await db.findAllRoles();
+
+    const employee = await prompt ([
+        {
+            name: "first_name",
+            message: "Enter the employee's first name:"
+        },
+        {
+            name: "last_name",
+            message: "Enter the employee's last name:"
+        }
+    ]);
+    // Choosing a role for this employee
+    var roleChoices = []
+    for (let i = 0; i < roles.length; i++) {
+        let roleChoice = {}
+        roleChoice.name = roles[i].title;
+        roleChoice.value = roles[i].id;
+        roleChoices.push(roleChoice);        
+    }
+    const  {roleId}  = await prompt ([
+        {
+            type: "list",
+            name: "roleId",
+            message: "Chose a role for this employee:",
+            choices: roleChoices
+        }
+    ]);
+    employee.role_id = roleId;
+
+    // Choosing a manager for this employee
+    employees = await db.viewManagers();
+    var possibleManagers = []
+    for (let i = 0; i < employees.length; i++) {
+        let manager = {}
+        manager.name = employees[i].first_name + ' ' + employees[i].last_name;
+        manager.value = employees[i].id;
+        possibleManagers.push(manager);
+    }
+    const {managerId}  = await prompt ([
+        {
+            type: "list",
+            name: "managerId",
+            message: "Chose a manager for this employee",
+            choices: possibleManagers
+        }
+    ])
+    employee.manager_id = managerId;
+    console.log(employee)
+    await db.addNewEmployee(employee);
+
+    console.log("New employee added to database!")
+
 }

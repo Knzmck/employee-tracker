@@ -13,12 +13,14 @@ VALUES
 INSERT INTO roles 
     (title, salary, department_id)
 VALUES 
-("Manager", 42000.00, 1),
+("Manager", 45000.00, 1),
 ("Director of HR", 50000.00, 2), 
 ("Director of Accounting", 50000.00, 3), 
 ("Director of Sales", 50000.00, 4), 
 ("Director of Legal", 120000.00, 5), 
-("Director of Customer Service", 50000.00, 6);
+("Director of Customer Service", 50000.00, 6),
+("Salesman", 52000.00, 4),
+("Receptionist", 38000.00, 7);
 
 INSERT INTO employee 
     (first_name, last_name, role_id, manager_id)
