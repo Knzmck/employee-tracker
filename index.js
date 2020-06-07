@@ -48,6 +48,9 @@ async function mainPrompt() {
                     name: "Remove Department"
                 },
                 {
+                    name: "Remove Role"
+                },
+                {
                     name: "Quit"
                 }
             ]
@@ -66,12 +69,16 @@ async function mainPrompt() {
             return addEmployee();
         case ("Add Department"):
             return addNewDep();
+        case("Add Role"):
+            return addNewRole();
         case ("Update Employee Role"):
             return updateEmployeeRole();
         case ("Remove Department"):
             return removeDep();
         case ("Remove Employee"):
             return removeEmployee();
+        case ("Remove Role"):
+            return removeRole();
         default:
             quit();
     }
@@ -122,7 +129,7 @@ async function viewDep() {
 
 // View all roles 
 async function viewRoles() {
-    roles = await db.allRoles();
+    roles = await db.findAllRoles();
     console.table(roles)
 }
 // Add Employee
@@ -285,5 +292,38 @@ async function updateEmployeeRole() {
     await db.updateEmployeeRole(employeeId, roleId);
     console.log("Employee's role successfully updated!");
     viewEmployees();
-
 }
+
+async function addNewRole() {
+    departments = await db.viewDepartments();
+    const allDepartments = [];
+    for (let i = 0; i < departments.length; i++) {
+        let department = {}
+        department.name = departments[i].department_name;
+        department.value = departments[i].id;
+        allDepartments.push(department)
+    }
+    const role = await prompt([
+        {
+            name: "title",
+            message: "Enter the title of new role:",
+        },
+        {
+            name: "salary",
+            message: "Enter yearly salary of new role:",
+        },
+        {
+            type: "list",
+            name: "department_id",
+            message: "Which department does this role belong to?",
+            choices: allDepartments
+        }
+    ])
+    console.log(role)
+    await db.createRole(role);
+    console.log("New role successfully added!")
+    viewRoles();
+    mainPrompt();
+}
+
+// Remove Role

@@ -54,6 +54,7 @@ class DB {
             "DELETE FROM departments WHERE department_name = ?", departmentId
         )
     }
+    // Remove employee from database
     removeEmployeeFromDB(employeeId) {
         return this.connection.query(
             "DELETE FROM employee WHERE id = ?", employeeId
@@ -65,6 +66,12 @@ class DB {
             "UPDATE employee SET role_id = ? WHERE id = ?",
             [roleId, employeeId]
         );
+    }
+    // Create new role
+    createRole(role) {
+        return this.connection.query(
+            "INSERT INTO roles SET ?", role
+        )
     }
 };
 module.exports = new DB(connection);
