@@ -18,11 +18,13 @@ async function mainPrompt() {
             message: "Choose an action:",
             choices: [
                 {
-                    name: "View All Employees",
-                    value: "View All Employees"
+                    name: "View All Employees"
                 },
                 {
-                    name: "View All Employees By Department"
+                    name: "View All Roles"
+                },
+                {
+                    name: "View All Departments"
                 },
                 {
                     name: "View All Employees By Manager"
@@ -31,28 +33,16 @@ async function mainPrompt() {
                     name: "Add Employee"
                 },
                 {
-                    name: "Remove Employee"
+                    name: "Add Role"
+                },
+                {
+                    name: "Add Department"
                 },
                 {
                     name: "Update Employee Role"
                 },
                 {
-                    name: "Update Employee Manager"
-                },
-                {
-                    name: "View All Roles"
-                },
-                {
-                    name: "Add Role"
-                },
-                {
-                    name: "Remove Role"
-                },
-                {
-                    name: "View All Departments"
-                },
-                {
-                    name: "Add Department"
+                    name: "Remove Employee"
                 },
                 {
                     name: "Remove Department"
@@ -67,8 +57,10 @@ async function mainPrompt() {
     switch (userChoice.first) {
         case ("View All Employees"):
             return viewEmployees()
-        case ("View All Employees By Department"):
-            return console.log ("hello")
+        case ("View All Roles"):
+            return
+        case ("View All Departments"):
+            return viewDep();
         case ("View All Employees By Manager"):
             return viewManagers();
         case ("Add Employee"):
@@ -76,10 +68,6 @@ async function mainPrompt() {
         case ("Remove Employee"):
             return
         case ("Update Employee Role"):
-            return
-        case ("Update Employee Manager"):
-            return
-        case ("View All Roles"):
             return
         case ("Add Department"):
             return
@@ -89,12 +77,12 @@ async function mainPrompt() {
             quit();
     }
 }
-
+// function to exit program
 function quit() {
     console.log("Exiting Program!")
     process.exit();
 }
-
+// View all employees from employee table
 async function viewEmployees() {
     console.log("hiya")
     allEmployees = await db.findAllEmployees();
@@ -122,4 +110,10 @@ async function viewManagers(){
     empByManager = await db.viewEmployeesByManager(employeesByManager.managerChoice);
     
     console.table(empByManager);
+}
+
+// View all departments
+async function viewDep() {
+    dep = await db.viewDepartments();
+    console.table(dep);
 }
