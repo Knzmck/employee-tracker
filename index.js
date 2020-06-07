@@ -72,7 +72,7 @@ async function mainPrompt() {
         case ("Remove Department"):
             return removeDep();
         case ("Remove Employee"):
-            return
+            return removeEmployee();
         default:
             quit();
     }
@@ -197,6 +197,7 @@ async function addNewDep() {
     viewDep()
     console.log("department added!")
 }
+
 // Remove Department 
 async function removeDep() {
     departments = await db.viewDepartments();
@@ -220,4 +221,28 @@ async function removeDep() {
     await db.removeDepartment(departmentId);
     viewDep();
     console.log("You've removed the selected department");
+}
+
+// Remove Employee
+async function removeEmployee() {
+    employees = await db.findAllEmployees();
+    const allEmployees = [];
+    for (let i = 0; i < employees.length; i++) {
+        let employee = {}
+        employee.name = employees[i].first_name + ' ' + employees[i].last_name;
+        employee.value = employees[i].id;
+        allEmployees.push(employee)
+    }
+console.log(allEmployees)
+    const { employeeId } = await prompt([
+        {
+            type: "list",
+            name: "employeeId",
+            message: "Which employee would you like to remove?",
+            choices: allEmployees
+        }
+    ])
+    console.log(employeeId)
+    await db.removeEmployeeFromDB(employeeId) 
+    viewEmployees();
 }

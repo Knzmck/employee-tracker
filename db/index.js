@@ -54,6 +54,11 @@ class DB {
             "DELETE FROM departments WHERE department_name = ?", departmentId
         )
     }
+    removeEmployeeFromDB (employeeId) {
+        return this.connection.query(
+            "DELETE FROM employee WHERE id = ?", employeeId
+        )
+    }
 };
 module.exports = new DB(connection);
 
