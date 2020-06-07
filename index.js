@@ -53,7 +53,6 @@ async function mainPrompt() {
             ]
         }
     ])
-    console.log(userChoice)
     switch (userChoice.first) {
         case ("View All Employees"):
             return viewEmployees()
@@ -68,7 +67,7 @@ async function mainPrompt() {
         case ("Add Department"):
             return addNewDep();
         case ("Update Employee Role"):
-            return
+            return updateEmployeeRole();
         case ("Remove Department"):
             return removeDep();
         case ("Remove Employee"):
@@ -192,7 +191,6 @@ async function addNewDep() {
             message: "Enter name of new department"
         }
     ])
-    console.log(department)
     await db.addNewDepartment(department)
     viewDep()
     console.log("department added!")
@@ -208,7 +206,6 @@ async function removeDep() {
         department.id = departments[i].id;
         allDepartments.push(department)
     }
-    console.log(allDepartments)
     const { departmentId } = await prompt([
         {
             type: "list",
@@ -217,7 +214,6 @@ async function removeDep() {
             choices: allDepartments
         }
     ])
-    console.log(departmentId)
     await db.removeDepartment(departmentId);
     viewDep();
     console.log("You've removed the selected department");
@@ -233,7 +229,6 @@ async function removeEmployee() {
         employee.value = employees[i].id;
         allEmployees.push(employee)
     }
-console.log(allEmployees)
     const { employeeId } = await prompt([
         {
             type: "list",
@@ -242,7 +237,13 @@ console.log(allEmployees)
             choices: allEmployees
         }
     ])
-    console.log(employeeId)
-    await db.removeEmployeeFromDB(employeeId) 
+    await db.removeEmployeeFromDB(employeeId)
+    console.log("Selected employee successfully removed from database")
     viewEmployees();
+}
+
+// Update Employee Role
+
+async function updateEmployeeRole() {
+
 }
