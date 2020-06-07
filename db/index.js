@@ -73,6 +73,12 @@ class DB {
             "INSERT INTO roles SET ?", role
         )
     }
+    // Remove Role 
+    deleteRole (roleId) {
+        return this.connection.query(
+            "DELETE FROM roles WHERE id = ?", roleId
+        )
+    }
 };
 module.exports = new DB(connection);
 

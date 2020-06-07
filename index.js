@@ -323,7 +323,28 @@ async function addNewRole() {
     await db.createRole(role);
     console.log("New role successfully added!")
     viewRoles();
-    mainPrompt();
 }
 
 // Remove Role
+async function removeRole() {
+    const roles = await db.findAllRoles();
+    var roleChoices = []
+    for (let i = 0; i < roles.length; i++) {
+        let roleChoice = {}
+        roleChoice.name = roles[i].title;
+        roleChoice.value = roles[i].id;
+        roleChoices.push(roleChoice);
+    }
+    // Choose a role to delete
+    const { roleId } = await prompt([
+        {
+            type: "list",
+            name: "roleId",
+            message: "Chose a role to remove:",
+            choices: roleChoices
+        }
+    ]);
+    await db.deleteRole(roleId);
+    console.log("Role Successfully removed from database!");
+    viewRoles();
+}
