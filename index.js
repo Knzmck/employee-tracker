@@ -33,10 +33,10 @@ async function mainPrompt() {
                     name: "Add Employee"
                 },
                 {
-                    name: "Add Role"
+                    name: "Add Department"
                 },
                 {
-                    name: "Add Department"
+                    name: "Add Role"
                 },
                 {
                     name: "Update Employee Role"
