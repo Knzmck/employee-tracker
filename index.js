@@ -84,9 +84,9 @@ function quit() {
 }
 // View all employees from employee table
 async function viewEmployees() {
-    console.log("hiya")
     allEmployees = await db.findAllEmployees();
     console.table(allEmployees);
+    mainPrompt();
 }
 
 // View Employees for a specific manager function
@@ -110,6 +110,7 @@ async function viewManagers() {
     empByManager = await db.viewEmployeesByManager(employeesByManager.managerChoice);
 
     console.table(empByManager);
+    mainPrompt();
 }
 
 // View all departments
@@ -174,8 +175,10 @@ async function addEmployee () {
     ])
     employee.manager_id = managerId;
     console.log(employee)
+    // Add employee info to database
     await db.addNewEmployee(employee);
-
+    // To view the updated version of the database
+    viewEmployees();
     console.log("New employee added to database!")
-
 }
+
