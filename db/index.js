@@ -42,6 +42,12 @@ class DB {
             "INSERT INTO employee SET ?", employee
         )
     }
+    // Add new department to db
+    addNewDepartment(department) {
+        return this.connection.query(
+            "INSERT INTO departments SET ?", department
+        )
+    }
 };
 module.exports = new DB(connection);
 

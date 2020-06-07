@@ -66,13 +66,13 @@ async function mainPrompt() {
         case ("Add Employee"):
             return addEmployee();
         case ("Add Department"):
-            return
+            return addNewDep();
         case ("Update Employee Role"):
             return
         case ("Remove Department"):
             return
         case ("Remove Employee"):
-             return
+            return
         default:
             quit();
     }
@@ -81,6 +81,7 @@ async function mainPrompt() {
 function quit() {
     console.log("Exiting Program!")
     process.exit();
+    mainPrompt();
 }
 // View all employees from employee table
 async function viewEmployees() {
@@ -117,6 +118,7 @@ async function viewManagers() {
 async function viewDep() {
     dep = await db.viewDepartments();
     console.table(dep);
+    mainPrompt()
 }
 
 // View all roles 
@@ -125,10 +127,10 @@ async function viewRoles() {
     console.table(roles)
 }
 // Add Employee
-async function addEmployee () {
+async function addEmployee() {
     const roles = await db.findAllRoles();
 
-    const employee = await prompt ([
+    const employee = await prompt([
         {
             name: "first_name",
             message: "Enter the employee's first name:"
@@ -144,9 +146,9 @@ async function addEmployee () {
         let roleChoice = {}
         roleChoice.name = roles[i].title;
         roleChoice.value = roles[i].id;
-        roleChoices.push(roleChoice);        
+        roleChoices.push(roleChoice);
     }
-    const  {roleId}  = await prompt ([
+    const { roleId } = await prompt([
         {
             type: "list",
             name: "roleId",
@@ -165,7 +167,7 @@ async function addEmployee () {
         manager.value = employees[i].id;
         possibleManagers.push(manager);
     }
-    const {managerId}  = await prompt ([
+    const { managerId } = await prompt([
         {
             type: "list",
             name: "managerId",
@@ -180,5 +182,19 @@ async function addEmployee () {
     // To view the updated version of the database
     viewEmployees();
     console.log("New employee added to database!")
+}
+
+// Add new Department
+async function addNewDep() {
+    const department = await prompt([
+        {
+            name: "department_name",
+            message: "Enter name of new department"
+        }
+    ])
+    console.log(department)
+    await db.addNewDepartment(department)
+    viewDep()
+    console.log("department added!")
 }
 
